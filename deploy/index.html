@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Welltris</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+  </head>
+
+  <body>
+    <!-- Include bootstrap -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous">
+    </script>
+      
+    <!--  Embed the elm code in the html. -->
+    <script src="welltris.js"></script>
+    <script>
+      // Instantiate and run the app.
+      var app = Elm.Main.fullscreen();
+
+      // Get the high score.
+      var highScore = localStorage.getItem("highScore")
+      if (highScore != null )
+        app.ports.getHighScore.send(highScore);
+
+      // Update the high score as it comes in.
+      app.ports.setNewHighScore.subscribe(function(highScore) {
+       localStorage.setItem("highScore", highScore);
+       app.ports.getHighScore.send(highScore);
+      });
+    </script>
+  </body>
+
+</html>
