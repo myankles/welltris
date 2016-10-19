@@ -18,6 +18,7 @@ class CompileElmHandler(SimpleHandler):
             make = subprocess.Popen('Make', stdout=subprocess.PIPE)
             (outData, errData) = make.communicate()
             sys.stdout.write(outData)
+            sys.stdout.write(errData)
 
             # output any errors
             if make.returncode != 0:
